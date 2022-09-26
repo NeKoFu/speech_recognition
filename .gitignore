@@ -4,6 +4,7 @@
 .packages
 .pub/
 build/
+example/.dart_tool/flutter_build
 ios/.generated/
 packages
 pubspec.lock
