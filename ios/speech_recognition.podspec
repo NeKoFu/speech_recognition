@@ -8,14 +8,13 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 A new flutter plugin project.
                        DESC
-  s.homepage         = 'https://github.com/rxlabz/speech_recognition'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'RX Labz' => 'rxlabz@gmail.com' }
+  s.author           = { 'Kavacode' => 'contact@kavacode.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
 end
 

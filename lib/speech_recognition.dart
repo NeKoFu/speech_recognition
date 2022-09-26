@@ -11,33 +11,30 @@ typedef void ErrorHandler(SpeechRecognitionError error);
 
 /// the channel to control the speech recognition
 class SpeechRecognition {
-  static const MethodChannel _channel =
-      const MethodChannel('speech_recognition');
-
-  static final SpeechRecognition _speech = new SpeechRecognition._internal();
-
+  static const MethodChannel _channel = const MethodChannel('speech_recognition');
+  static final SpeechRecognition _speech = SpeechRecognition._internal();
   factory SpeechRecognition() => _speech;
 
   SpeechRecognition._internal() {
     _channel.setMethodCallHandler(_platformCallHandler);
   }
 
-  AvailabilityHandler availabilityHandler;
+  late AvailabilityHandler availabilityHandler;
 
-  StringResultHandler currentLocaleHandler;
-  StringResultHandler recognitionResultHandler;
+  late StringResultHandler currentLocaleHandler;
+  late StringResultHandler recognitionResultHandler;
 
-  VoidCallback recognitionStartedHandler;
+  late VoidCallback recognitionStartedHandler;
 
-  StringResultHandler recognitionCompleteHandler;
+  late StringResultHandler recognitionCompleteHandler;
 
-  ErrorHandler errorHandler;
+  late ErrorHandler errorHandler;
 
   /// ask for speech  recognizer permission
   Future activate() => _channel.invokeMethod("speech.activate");
 
   /// start listening
-  Future listen({String locale}) =>
+  Future listen({String locale = ""}) =>
       _channel.invokeMethod("speech.listen", locale);
 
   /// cancel speech
