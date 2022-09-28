@@ -1,9 +1,9 @@
 name: speech_recognition
 description: A flutter plugin to use the speech recognition on iOS and Android
-version: 1.0.0
+version: 1.0.1
 
 environment:
-  sdk: ">=2.16.0-80.1.beta <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
   flutter: ">=2.5.0"
   
 dependencies:
