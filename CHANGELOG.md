@@ -1,5 +1,7 @@
-## 0.3.0
+## 1.0.1
+- nullsafe version
 
+## 0.3.0
 - dart 2.0+ & Flutter 0.11.8
 - fix ios error #10 
 
