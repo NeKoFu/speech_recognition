@@ -5,6 +5,7 @@ Pod::Spec.new do |s|
   s.name             = 'speech_recognition'
   s.version          = '0.3.0'
   s.summary          = 'Flutter Speech recognition plugin'
+  s.homepage         = 'https://github.com/NeKoFu/speech_recognition'
   s.description      = <<-DESC
 A new flutter plugin project.
                        DESC
@@ -15,6 +16,6 @@ A new flutter plugin project.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '12.0'
 end
 
