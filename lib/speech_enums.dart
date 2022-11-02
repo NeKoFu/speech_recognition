@@ -41,6 +41,7 @@ class SpeechRecognitionError {
   static const SpeechRecognitionError noPermission = SpeechRecognitionError._(9);
 
   static const List<SpeechRecognitionError> values = <SpeechRecognitionError>[
+    unknown,
     networkTimeout,
     network,
     recording,

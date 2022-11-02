@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
 
   bool _speechRecognitionAvailable = false;
   bool _isListening = false;
+  bool _micPermission = true; // false only when user denied access
 
   String transcription = '';
 
@@ -42,9 +44,31 @@ class _MyAppState extends State<MyApp> {
     activateSpeechRecognizer();
   }
 
+  Future<void> permission() async {
+    var status = await Permission.microphone.status;
+    if (PermissionStatus.granted == status) {
+      setState(() => _micPermission = true);
+    } else if (PermissionStatus.denied == status ||
+      PermissionStatus.restricted == status) {
+      await [
+        Permission.microphone,
+        Permission.speech
+      ].request();
+      status = await Permission.microphone.status;
+
+      if (PermissionStatus.granted == status) {
+        setState(() => _micPermission = true);
+      } else {
+        // rebuild just to debug
+        setState(() => _micPermission = false);
+      }
+    }
+  }
+
   // Platform messages are asynchronous, so we initialize in an async method.
-  void activateSpeechRecognizer() {
+  Future<void> activateSpeechRecognizer() async {
     print('_MyAppState.activateSpeechRecognizer... ');
+    await permission();
     _speech = new SpeechRecognition();
     _speech.setAvailabilityHandler(onSpeechAvailability);
     _speech.setCurrentLocaleHandler(onCurrentLocale);
@@ -52,9 +76,8 @@ class _MyAppState extends State<MyApp> {
     _speech.setRecognitionResultHandler(onRecognitionResult);
     _speech.setRecognitionCompleteHandler(onRecognitionComplete);
     _speech.setErrorHandler(errorHandler);
-    _speech
-        .activate()
-        .then((res) => setState(() => _speechRecognitionAvailable = res));
+    final res = await _speech.activate();
+    setState(() => _speechRecognitionAvailable = res);
   }
 
   @override
